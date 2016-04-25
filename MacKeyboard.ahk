@@ -40,12 +40,12 @@ RWin::RControl
 RControl::RWin
 
 ; Eject Key
-;F20::SendInput {Insert}
+F20::SendInput {Insert}
 
 ; F13-15, Standard Windows Mapping
-;F13::SendInput {PrintScreen}
-;F14::SendInput {ScrollLock}
-;F15::SendInput {Pause}
+F13::SendInput {PrintScreen}
+F14::SendInput {ScrollLock}
+F15::SendInput {Pause}
 
 ; Launch the Task view (Windows 10 only)
 F3::SendFunctionKey("{F3}", "#{Tab}")

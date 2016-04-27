@@ -45,7 +45,8 @@ F20::SendInput {Insert}
 ; F13-15, Standard Windows Mapping
 F13::SendInput {PrintScreen}
 F14::SendInput {ScrollLock}
-F15::SendInput {Pause}
+F15::SendInput {Break}
+^F15::SendInput ^{CtrlBreak}
 
 ; Launch the Task view (Windows 10 only)
 F3::SendFunctionKey("{F3}", "#{Tab}")

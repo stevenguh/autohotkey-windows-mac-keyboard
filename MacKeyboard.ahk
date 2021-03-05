@@ -81,7 +81,7 @@ $Down:: Send {Ctrl Up}^{End}{Ctrl Down}
 
 ; cmd+shift+left/right/up/down
 *+Left:: Send {Ctrl Up}+{Home}{Ctrl Down}
-*+Right:: Send {trl Up}+{End}{Ctrl Down}
+*+Right:: Send {Ctrl Up}+{End}{Ctrl Down}
 $*+Up:: Send {Ctrl Up}^+{Home}{Ctrl Down}
 $*+Down:: Send {Ctrl Up}^+{End}{Ctrl Down}
 

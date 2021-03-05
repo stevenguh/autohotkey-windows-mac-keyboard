@@ -46,15 +46,32 @@ ExtractAppTitle(FullTitle)
 ; --------------------------------------------------------------
 ; Swap Control and Windows key
 ; --------------------------------------------------------------
+AltTabbed := false
 
 LWin::Send {Ctrl Down}
-LWin Up::Send {Ctrl Up}
+LWin Up::
+if (AltTabbed) {
+    ; Use to release the alt key for
+    ; Cmd-Tab remap below
+    Send {Alt Up}
+    AltTabbed := false
+}
+Send {Ctrl Up}
+return
 
 LCtrl::Send {LWin Down}
 LCtrl Up::Send {LWin Up}
 
 RWin::Send {Ctrl Down}
-RWin Up::Send {Ctrl Up}
+RWin Up::
+if (AltTabbed) {
+    ; Use to release the alt key for
+    ; Cmd-Tab remap below
+    Send {Alt Up}
+    AltTabbed := false
+}
+Send {Ctrl Up}
+return
 
 RCtrl::Send {RWin Down}
 RCtrl Up::Send {RWin Up}
@@ -103,6 +120,16 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 ; --------------------------------------------------------------
 
 #If GetWinKeyState() ; if cmd-pressed
+
+; Switch window -- Cmd + Tab
+Tab::
+if !AltTabbed {
+    Send {Ctrl Up}{Alt Down}{Tab}
+    AltTabbed := true
+} else {
+    Send {Tab}
+}
+return
 
 ; Capture entire screen -- Cmd + Shift + 3
 ; (requires Windows 10 Snip & Sketch)

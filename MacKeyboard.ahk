@@ -78,6 +78,29 @@ return
 ;RCtrl Up::Send {RWin Up}
 
 ; --------------------------------------------------------------
+; Personal keys
+; --------------------------------------------------------------
+SetCapsLockState AlwaysOff
+
+; Change CapsLock to Ctrl; Shift+Caps to CapsLock
++CapsLock::CapsLock
+
+CapsLock::Send {Ctrl Down}
+CapsLock Up::Send {Ctrl Up}
+
+#If (GetWinKeyState() && GetKeyState("CapsLock", "P"))
+
+; Launch Emoji keyboard -- Caps + Cmd + Space
+; (Windows 10 only)
+Space::Send {Ctrl Up}#{.}
+
+#If
+
+; Add Horizontal Scroll with Shift
++WheelDown::WheelRight
++WheelUp::WheelLeft
+
+; --------------------------------------------------------------
 ; Text navigation
 ; --------------------------------------------------------------
 
@@ -225,15 +248,3 @@ F15::Send {Break}
 
 ; Eject Key
 F20::Send {Insert}
-
-; --------------------------------------------------------------
-; Personal keys
-; --------------------------------------------------------------
-
-; Change CapsLock to Ctrl; Shift+Caps to CapsLock
-+CapsLock::CapsLock
-CapsLock::Ctrl
-
-; Add Horizontal Scroll with Shift
-+WheelDown::WheelRight
-+WheelUp::WheelLeft

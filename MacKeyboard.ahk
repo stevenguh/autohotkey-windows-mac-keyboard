@@ -120,7 +120,7 @@ Space::Send {Ctrl Up}#s
 Space Up::Send {Ctrl Down}
 
 ; Paste plain text -- Cmd+Alt+Shift+V
-!+v::
+$*!+v::
     AutoTrim Off
     Clip0 = %ClipBoardAll%
     ClipBoard = %ClipBoard%       ; Convert to text

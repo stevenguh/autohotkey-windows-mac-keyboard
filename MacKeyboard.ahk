@@ -223,12 +223,6 @@ F14::Send {ScrollLock}
 F15::Send {Break}
 ^F15::Send ^{CtrlBreak}
 
-; Custom App Launchers
-;F16::Run http://twitter.com
-;F17::Run
-;F18::Run
-;F19::Run
-
 ; Eject Key
 F20::Send {Insert}
 

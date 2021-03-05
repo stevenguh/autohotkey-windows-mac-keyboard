@@ -55,6 +55,16 @@ F3::SendFunctionKey("{F3}", "#{Tab}")
 ^Space::SendInput #s
 
 ; --------------------------------------------------------------
+; Mac-like screenshots in Windows (requires Windows 10 Snip & Sketch)
+; --------------------------------------------------------------
+
+; Capture entire screen with CMD/WIN + SHIFT + 3
+^+3::SendInput #{PrintScreen}
+
+; Capture portion of the screen with CMD/WIN + SHIFT + 4
+^+4::SendInput #+s
+
+; --------------------------------------------------------------
 ; Media/Function Keys
 ; --------------------------------------------------------------
 

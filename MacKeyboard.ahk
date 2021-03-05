@@ -163,6 +163,23 @@ Return
 ; Launch the Task view (Windows 10 only)
 F3::SendIfCmdDown("{F3}", "#{Tab}")
 
+;; Use F4 as the Win key
+F4::
+if GetWinKeyState() {
+    Send {F4 Down}
+} else {
+    Send {LWin Down}
+}
+return
+
+F4 Up::
+if GetWinKeyState() {
+    Send {F4 Up}
+} else {
+    Send {LWin Up}
+}
+return
+
 ; Media Keys
 F7::SendIfCmdDown("{F7}", "{Media_Prev}")
 F8::SendIfCmdDown("{F8}", "{Media_Play_Pause}")

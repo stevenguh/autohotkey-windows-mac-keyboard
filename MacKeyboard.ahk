@@ -149,3 +149,7 @@ F20::Send {Insert}
 ; Change CapsLock to Ctrl; Shift+Caps to CapsLock
 +CapsLock::CapsLock
 CapsLock::Ctrl
+
+; Add Horizontal Scroll with Shift
++WheelDown::WheelRight
++WheelUp::WheelLeft

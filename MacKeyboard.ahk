@@ -58,10 +58,6 @@ if (AltTabbed) {
 }
 Send {Ctrl Up}
 return
-
-LCtrl::Send {LWin Down}
-LCtrl Up::Send {LWin Up}
-
 RWin::Send {Ctrl Down}
 RWin Up::
 if (AltTabbed) {
@@ -73,8 +69,13 @@ if (AltTabbed) {
 Send {Ctrl Up}
 return
 
-RCtrl::Send {RWin Down}
-RCtrl Up::Send {RWin Up}
+; Use F4 to replace Win key
+; This is so the the muscle of ctrl key can be preserved
+; like Ctrl-Tab between window or Ctrl-C in Terminal
+;LCtrl::Send {LWin Down}
+;LCtrl Up::Send {LWin Up}
+;RCtrl::Send {RWin Down}
+;RCtrl Up::Send {RWin Up}
 
 ; --------------------------------------------------------------
 ; Text navigation

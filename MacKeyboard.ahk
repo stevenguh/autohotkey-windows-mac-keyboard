@@ -21,12 +21,16 @@ SetTitleMatchMode 2 ; Match any part of window title
 ; --------------------------------------------------------------
 ; Function
 ; --------------------------------------------------------------
-SendFunctionKey(originalKey, modifiedKey) {
-  if GetKeyState("LWin", "P") || GetKeyState("RWin", "P") {
-    SendInput %originalKey%
-  } else {
-    SendInput %modifiedKey%
-  }
+GetWinKeyState() {
+    return GetKeyState("LWin", "P") || GetKeyState("RWin", "P")
+}
+
+SendIfCmdDown(key, elseKey) {
+    if GetWinKeyState() {
+        Send %key%
+    } else {
+        Send %elseKey%
+    }
 }
 
 ; --------------------------------------------------------------
@@ -39,17 +43,8 @@ LControl::LWin
 RWin::RControl
 RControl::RWin
 
-; Eject Key
-F20::SendInput {Insert}
 
-; F13-15, Standard Windows Mapping
-F13::SendInput {PrintScreen}
-F14::SendInput {ScrollLock}
-F15::SendInput {Break}
-^F15::SendInput ^{CtrlBreak}
 
-; Launch the Task view (Windows 10 only)
-F3::SendFunctionKey("{F3}", "#{Tab}")
 
 ; Launch Cortana (Windows 10 only)
 ^Space::SendInput #s
@@ -68,18 +63,30 @@ F3::SendFunctionKey("{F3}", "#{Tab}")
 ; Media/Function Keys
 ; --------------------------------------------------------------
 
+; Launch the Task view (Windows 10 only)
+F3::SendIfCmdDown("{F3}", "#{Tab}")
+
 ; Media Keys
-F7::SendFunctionKey("{F7}", "{Media_Prev}")
-F8::SendFunctionKey("{F8}", "{Media_Play_Pause}")
-F9::SendFunctionKey("{F9}", "{Media_Next}")
+F7::SendIfCmdDown("{F7}", "{Media_Prev}")
+F8::SendIfCmdDown("{F8}", "{Media_Play_Pause}")
+F9::SendIfCmdDown("{F9}", "{Media_Next}")
 
 ; Volume control keys
-F10::SendFunctionKey("{F12}", "{Volume_Mute}")
-F11::SendFunctionKey("{F11}", "{Volume_Down}")
-F12::SendFunctionKey("{F12}", "{Volume_Up}")
+F10::SendIfCmdDown("{F10}", "{Volume_Mute}")
+F11::SendIfCmdDown("{F11}", "{Volume_Down}")
+F12::SendIfCmdDown("{F12}", "{Volume_Up}")
+
+; F13-15, Standard Windows Mapping
+F13::Send {PrintScreen}
+F14::Send {ScrollLock}
+F15::Send {Break}
+^F15::Send ^{CtrlBreak}
 
 ; Custom App Launchers
 ;F16::Run http://twitter.com
 ;F17::Run
 ;F18::Run
 ;F19::Run
+
+; Eject Key
+F20::Send {Insert}

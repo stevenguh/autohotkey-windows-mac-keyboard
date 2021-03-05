@@ -113,6 +113,17 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 Space::Send {LCtrl Up}#s
 Space Up::Send {LCtrl Down}
 
+; Paste plain text -- Cmd+Alt+Shift+V
+!+v::
+    AutoTrim Off
+    Clip0 = %ClipBoardAll%
+    ClipBoard = %ClipBoard%       ; Convert to text
+    Send ^v                       ; For best compatibility: SendPlay
+    Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+    ClipBoard = %Clip0%           ; Restore original ClipBoard
+    VarSetCapacity(Clip0, 0)      ; Free memory
+return
+
 #If ; end-if
 
 ; --------------------------------------------------------------

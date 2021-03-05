@@ -87,6 +87,8 @@ $*+Down:: Send {Ctrl Up}^+{End}
 
 ; cmd+backspace
 $Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}
+; cmd+delete
+$Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 
 #If ; end-if
 

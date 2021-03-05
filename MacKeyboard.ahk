@@ -134,17 +134,14 @@ return
 ; Capture entire screen -- Cmd + Shift + 3
 ; (requires Windows 10 Snip & Sketch)
 *+3::Send {Ctrl Up}#{PrintScreen}
-*+3 Up::Send {Ctrl Down}
 
 ; Capture portion of the screen -- Cmd + Shift + 4;
 ; (requires Windows 10 Snip & Sketch)
 *+4::Send {Ctrl Up}#+s
-*+4 Up::Send {Ctrl Down}
 
 ; Launch Spotlight/Cortana -- Cmd + Space
 ; (Windows 10 only)
 Space::Send {Ctrl Up}#s
-Space Up::Send {Ctrl Down}
 
 ; Paste plain text -- Cmd+Alt+Shift+V
 $*!+v::

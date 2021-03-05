@@ -47,14 +47,14 @@ ExtractAppTitle(FullTitle)
 ; Swap Control and Windows key
 ; --------------------------------------------------------------
 
-LWin::Send {LCtrl Down}
-LWin Up::Send {LCtrl Up}
+LWin::Send {Ctrl Down}
+LWin Up::Send {Ctrl Up}
 
 LCtrl::Send {LWin Down}
 LCtrl Up::Send {LWin Up}
 
-RWin::Send {RCtrl Down}
-RWin Up::Send {RCtrl Up}
+RWin::Send {Ctrl Down}
+RWin Up::Send {Ctrl Up}
 
 RCtrl::Send {RWin Down}
 RCtrl Up::Send {RWin Up}
@@ -106,18 +106,18 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 
 ; Capture entire screen -- Cmd + Shift + 3
 ; (requires Windows 10 Snip & Sketch)
-*+3::Send {LCtrl Up}#{PrintScreen}
-*+3 Up::Send {LCtrl Down}
+*+3::Send {Ctrl Up}#{PrintScreen}
+*+3 Up::Send {Ctrl Down}
 
 ; Capture portion of the screen -- Cmd + Shift + 4;
 ; (requires Windows 10 Snip & Sketch)
-*+4::Send {LCtrl Up}#+s
-*+4 Up::Send {LCtrl Down}
+*+4::Send {Ctrl Up}#+s
+*+4 Up::Send {Ctrl Down}
 
 ; Launch Spotlight/Cortana -- Cmd + Space
 ; (Windows 10 only)
-Space::Send {LCtrl Up}#s
-Space Up::Send {LCtrl Down}
+Space::Send {Ctrl Up}#s
+Space Up::Send {Ctrl Down}
 
 ; Paste plain text -- Cmd+Alt+Shift+V
 !+v::

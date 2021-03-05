@@ -74,19 +74,19 @@ $!Backspace:: Send ^{BackSpace}
 
 #If GetWinKeyState() ; if cmd-pressed
 ; cmd+left/right/up/down
-Left:: Send {Ctrl Up}{Home}{Ctrl Down}
-Right:: Send {Ctrl Up}{End}{Ctrl Down}
-$Up:: Send {Ctrl Up}^{Home}{Ctrl Down}
-$Down:: Send {Ctrl Up}^{End}{Ctrl Down}
+Left:: Send {Ctrl Up}{Home}
+Right:: Send {Ctrl Up}{End}
+$Up:: Send {Ctrl Up}^{Home}
+$Down:: Send {Ctrl Up}^{End}
 
 ; cmd+shift+left/right/up/down
-*+Left:: Send {Ctrl Up}+{Home}{Ctrl Down}
-*+Right:: Send {Ctrl Up}+{End}{Ctrl Down}
-$*+Up:: Send {Ctrl Up}^+{Home}{Ctrl Down}
-$*+Down:: Send {Ctrl Up}^+{End}{Ctrl Down}
+*+Left:: Send {Ctrl Up}+{Home}
+*+Right:: Send {Ctrl Up}+{End}
+$*+Up:: Send {Ctrl Up}^+{Home}
+$*+Down:: Send {Ctrl Up}^+{End}
 
 ; cmd+backspace
-$Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}{Ctrl Down}
+$Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}
 
 #If ; end-if
 
@@ -98,13 +98,13 @@ $Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}{Ctrl Down}
 
 ; Capture entire screen with CMD + SHIFT + 3
 ; (requires Windows 10 Snip & Sketch)
-*+3::Send {Ctrl Up}#{PrintScreen}{Ctrl Down}
+*+3::Send {Ctrl Up}#{PrintScreen}
 
 ; Capture portion of the screen with CMD + SHIFT + 4; (requires Windows 10 Snip & Sketch)
-*+4::Send {Ctrl Up}#+s{Ctrl Down}
+*+4::Send {Ctrl Up}#+s
 
 ; Launch Spotlight/Cortana (Windows 10 only)
-Space::Send {Ctrl Up}#s{Ctrl Down}
+Space::Send {Ctrl Up}#s
 
 #If ; end-if
 

@@ -133,3 +133,11 @@ F15::Send {Break}
 
 ; Eject Key
 F20::Send {Insert}
+
+; --------------------------------------------------------------
+; Personal keys
+; --------------------------------------------------------------
+
+; Change CapsLock to Ctrl; Shift+Caps to CapsLock
++CapsLock::CapsLock
+CapsLock::Ctrl

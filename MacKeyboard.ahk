@@ -96,6 +96,13 @@ Space::Send {Ctrl Up}#{.}
 
 #If
 
+#If (GetKeyState("CapsLock", "P"))
+
+; Disable built-in Win key shortcut -- Caps+Esc
+Esc::Send {Ctrl Up}{Esc}
+
+#If
+
 ; Add Horizontal Scroll with Shift
 +WheelDown::WheelRight
 +WheelUp::WheelLeft
@@ -143,7 +150,13 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 ; Mac-like shortcuts 
 ; --------------------------------------------------------------
 
+; Disable built-in Win key shortcut -- Ctrl+Esc
+^Esc::Send {Esc}
+
 #If GetWinKeyState() ; if cmd-pressed
+
+; Disable built-in Win key shortcut -- Cmd+Esc
+Esc::Send {Ctrl Up}{Esc}
 
 ; Switch window -- Cmd + Tab
 Tab::

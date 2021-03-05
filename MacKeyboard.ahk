@@ -1,6 +1,4 @@
 ;-----------------------------------------
-; Apple Wired Keyboard w/ Numpad (MB110LL) to Windows Key Mappings
-;=========================================
 ; This script assumes the driver for the keybaord is the generic one from windows,
 ; which also means that the Apple keyboard driver in bootcamp is not installed.
 ; --------------------------------------------------------------
@@ -34,30 +32,75 @@ SendIfCmdDown(key, elseKey) {
 }
 
 ; --------------------------------------------------------------
-; Mac -> Windows Translation
+; Swap Control and Windows key
 ; --------------------------------------------------------------
 
-; Swap left Control/Windows key with left Alt
-LWin::LControl
-LControl::LWin
-RWin::RControl
-RControl::RWin
+LWin::Send {LCtrl Down}
+LWin Up::Send {LCtrl Up}
 
+LCtrl::Send {LWin Down}
+LCtrl Up::Send {LWin Up}
 
+RWin::Send {RCtrl Down}
+RWin Up::Send {RCtrl Up}
 
-
-; Launch Cortana (Windows 10 only)
-^Space::SendInput #s
+RCtrl::Send {RWin Down}
+RCtrl Up::Send {RWin Up}
 
 ; --------------------------------------------------------------
-; Mac-like screenshots in Windows (requires Windows 10 Snip & Sketch)
+; Text navigation
 ; --------------------------------------------------------------
 
-; Capture entire screen with CMD/WIN + SHIFT + 3
-^+3::SendInput #{PrintScreen}
+; option+left/right
+$!Left::Send ^{Left}
+$!Right::Send ^{Right}
 
-; Capture portion of the screen with CMD/WIN + SHIFT + 4
-^+4::SendInput #+s
+; option+shift+left/right
+$*!+Left::Send ^+{Left}
+$*!+Right::Send ^+{Right}
+
+; option+shift+up/down
+$*!+Up::Send +{Up}
+$*!+Down::Send ^+{Down}
+
+; option+backspace
+$!Backspace:: Send ^{BackSpace}
+
+#If GetWinKeyState() ; if cmd-pressed
+; cmd+left/right/up/down
+Left:: Send {Ctrl Up}{Home}{Ctrl Down}
+Right:: Send {Ctrl Up}{End}{Ctrl Down}
+$Up:: Send {Ctrl Up}^{Home}{Ctrl Down}
+$Down:: Send {Ctrl Up}^{End}{Ctrl Down}
+
+; cmd+shift+left/right/up/down
+*+Left:: Send {Ctrl Up}+{Home}{Ctrl Down}
+*+Right:: Send {trl Up}+{End}{Ctrl Down}
+$*+Up:: Send {Ctrl Up}^+{Home}{Ctrl Down}
+$*+Down:: Send {Ctrl Up}^+{End}{Ctrl Down}
+
+; cmd+backspace
+$Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}{Ctrl Down}
+
+#If ; end-if
+
+; --------------------------------------------------------------
+; Mac-like shortcuts 
+; --------------------------------------------------------------
+
+#If GetWinKeyState() ; if cmd-pressed
+
+; Capture entire screen with CMD + SHIFT + 3
+; (requires Windows 10 Snip & Sketch)
+*+3::Send {Ctrl Up}#{PrintScreen}{Ctrl Down}
+
+; Capture portion of the screen with CMD + SHIFT + 4; (requires Windows 10 Snip & Sketch)
+*+4::Send {Ctrl Up}#+s{Ctrl Down}
+
+; Launch Spotlight/Cortana (Windows 10 only)
+Space::Send {Ctrl Up}#s{Ctrl Down}
+
+#If ; end-if
 
 ; --------------------------------------------------------------
 ; Media/Function Keys

@@ -1,6 +1,12 @@
 ;-----------------------------------------
-; This script assumes the driver for the keybaord is the generic one from windows,
+; This script assumes the driver for the keyboard is the generic one from windows,
 ; which also means that the Apple keyboard driver in bootcamp is not installed.
+; --------------------------------------------------------------
+; If you are using Apple Magic Keyboard and need to delete key via fn+backspace
+; you will need to the driver from bootcamp and change the the follow registry to 0
+; HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\KeyMagic\OSXFnBehavior
+; HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\KeyMagic\OSXFnBehavior
+; See https://blog.yo1.dog/apple-magic-keyboard-drivers-for-windows-10-mouse-trackpad-also/
 ; --------------------------------------------------------------
 ; NOTES
 ; --------------------------------------------------------------

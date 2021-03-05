@@ -143,6 +143,10 @@ return
 ; (Windows 10 only)
 Space::Send {Ctrl Up}#s
 
+; Launch Emoji keyboard -- Ctrl + Cmd + Space
+; (Windows 10 only)
+$*^Space::Send {Ctrl Up}#{.}
+
 ; Paste plain text -- Cmd+Alt+Shift+V
 $*!+v::
     AutoTrim Off

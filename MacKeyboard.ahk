@@ -157,18 +157,14 @@ $*!+v::
     VarSetCapacity(Clip0, 0)      ; Free memory
 return
 
-#If ; end-if
-
-; Switch windows of the same app -- Alt + `
+; Switch windows of the same app -- Cmd + `
 ; https://github.com/JuanmaMenendez/AutoHotkey-script-Open-Show-Apps/blob/master/AutoHotkey-script-Switch-Windows-same-App.ahk
-!`::
+`::
 WinGet, ActiveProcess, ProcessName, A
 WinGet, OpenWindowsAmount, Count, ahk_exe %ActiveProcess%
-
-If OpenWindowsAmount = 1  ; If only one Window exist, do nothing
+if OpenWindowsAmount = 1  ; If only one Window exist, do nothing
     Return
-	
-Else
+else
 	{
 		WinGetTitle, FullTitle, A
 		AppTitle := ExtractAppTitle(FullTitle)
@@ -181,7 +177,9 @@ Else
 			WinActivate, % "ahk_id " WindowsWithSameTitleList%WindowsWithSameTitleList%	; Activate next Window	
 		}
 	}
-Return
+return
+
+#If ; end-if
 
 ; --------------------------------------------------------------
 ; Media/Function Keys

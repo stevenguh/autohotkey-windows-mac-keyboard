@@ -98,15 +98,20 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 
 #If GetWinKeyState() ; if cmd-pressed
 
-; Capture entire screen with CMD + SHIFT + 3
+; Capture entire screen -- Cmd + Shift + 3
 ; (requires Windows 10 Snip & Sketch)
-*+3::Send {Ctrl Up}#{PrintScreen}
+*+3::Send {LCtrl Up}#{PrintScreen}
+*+3 Up::Send {LCtrl Down}
 
-; Capture portion of the screen with CMD + SHIFT + 4; (requires Windows 10 Snip & Sketch)
-*+4::Send {Ctrl Up}#+s
+; Capture portion of the screen -- Cmd + Shift + 4;
+; (requires Windows 10 Snip & Sketch)
+*+4::Send {LCtrl Up}#+s
+*+4 Up::Send {LCtrl Down}
 
-; Launch Spotlight/Cortana (Windows 10 only)
-Space::Send {Ctrl Up}#s
+; Launch Spotlight/Cortana -- Cmd + Space
+; (Windows 10 only)
+Space::Send {LCtrl Up}#s
+Space Up::Send {LCtrl Down}
 
 #If ; end-if
 

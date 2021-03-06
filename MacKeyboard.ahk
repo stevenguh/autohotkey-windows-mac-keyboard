@@ -94,6 +94,9 @@ CapsLock Up::Send {Ctrl Up}
 ; (Windows 10 only)
 Space::Send {Ctrl Up}#{.}
 
+; Lock screen -- Caps + Cmd + q
+q::DllCall("LockWorkStation") 
+
 #If
 
 #If (GetKeyState("CapsLock", "P"))
@@ -157,6 +160,9 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 
 ; Disable built-in Win key shortcut -- Cmd+Esc
 Esc::Send {Ctrl Up}{Esc}
+
+; Lock screen -- Ctrl + Cmd + q
+$*^q::DllCall("LockWorkStation") 
 
 ; Switch window -- Cmd + Tab
 Tab::

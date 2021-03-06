@@ -97,6 +97,10 @@ Space::Send {Ctrl Up}#{.}
 ; Lock screen -- Caps + Cmd + q
 q::DllCall("LockWorkStation") 
 
+; Vim-like key scroll
+d::Send {Ctrl Up}{PgDn}
+u::Send {Ctrl Up}{PgUp}
+
 #If
 
 #If (GetKeyState("CapsLock", "P"))

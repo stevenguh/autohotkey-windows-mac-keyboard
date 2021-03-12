@@ -48,8 +48,9 @@ ExtractAppTitle(FullTitle)
 ; --------------------------------------------------------------
 AltTabbed := false
 
-LWin::Send {Ctrl Down}
-LWin Up::
+LWin::
+Send {Ctrl Down}
+KeyWait, LWin
 if (AltTabbed) {
     ; Use to release the alt key for
     ; Cmd-Tab remap below
@@ -58,8 +59,10 @@ if (AltTabbed) {
 }
 Send {Ctrl Up}
 return
-RWin::Send {Ctrl Down}
-RWin Up::
+
+RWin::
+Send {Ctrl Down}
+KeyWait, RWin
 if (AltTabbed) {
     ; Use to release the alt key for
     ; Cmd-Tab remap below
@@ -85,28 +88,31 @@ SetCapsLockState AlwaysOff
 ; Change CapsLock to Ctrl; Shift+Caps to CapsLock
 +CapsLock::CapsLock
 
-CapsLock::Send {Ctrl Down}
-CapsLock Up::Send {Ctrl Up}
+CapsLock::
+Send {Ctrl Down}
+KeyWait, CapsLock
+Send {Ctrl Up}
+return
 
 #If (GetWinKeyState() && GetKeyState("CapsLock", "P"))
 
 ; Launch Emoji keyboard -- Caps + Cmd + Space
 ; (Windows 10 only)
-Space::Send {Ctrl Up}#{.}
+Space::Send {Ctrl Up}#{.}{Ctrl Down}
 
 ; Lock screen -- Caps + Cmd + q
 q::DllCall("LockWorkStation") 
 
 ; Vim-like key scroll
-d::Send {Ctrl Up}{PgDn}
-u::Send {Ctrl Up}{PgUp}
+d::Send {Ctrl Up}{PgDn}{Ctrl Down}
+u::Send {Ctrl Up}{PgUp}{Ctrl Down}
 
 #If
 
 #If (GetKeyState("CapsLock", "P"))
 
 ; Disable built-in Win key shortcut -- Caps+Esc
-Esc::Send {Ctrl Up}{Esc}
+Esc::Send {Ctrl Up}{Esc}{Ctrl Down}
 
 #If
 
@@ -135,21 +141,21 @@ $!Backspace:: Send ^{BackSpace}
 
 #If GetWinKeyState() ; if cmd-pressed
 ; cmd+left/right/up/down
-Left:: Send {Ctrl Up}{Home}
-Right:: Send {Ctrl Up}{End}
-$Up:: Send {Ctrl Up}^{Home}
-$Down:: Send {Ctrl Up}^{End}
+Left:: Send {Ctrl Up}{Home}{Ctrl Down}
+Right:: Send {Ctrl Up}{End}{Ctrl Down}
+$Up:: Send {Ctrl Up}^{Home}{Ctrl Down}
+$Down:: Send {Ctrl Up}^{End}{Ctrl Down}
 
 ; cmd+shift+left/right/up/down
-*+Left:: Send {Ctrl Up}+{Home}
-*+Right:: Send {Ctrl Up}+{End}
-$*+Up:: Send {Ctrl Up}^+{Home}
-$*+Down:: Send {Ctrl Up}^+{End}
+*+Left:: Send {Ctrl Up}+{Home}{Ctrl Down}
+*+Right:: Send {Ctrl Up}+{End}{Ctrl Down}
+$*+Up:: Send {Ctrl Up}^+{Home}{Ctrl Down}
+$*+Down:: Send {Ctrl Up}^+{End}{Ctrl Down}
 
 ; cmd+backspace
-$Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}
+$Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}{Ctrl Down}
 ; cmd+delete
-$Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
+$Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}{Ctrl Down}
 
 #If ; end-if
 
@@ -163,7 +169,7 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}
 #If GetWinKeyState() ; if cmd-pressed
 
 ; Disable built-in Win key shortcut -- Cmd+Esc
-Esc::Send {Ctrl Up}{Esc}
+Esc::Send {Ctrl Up}{Esc}{Ctrl Down}
 
 ; Lock screen -- Ctrl + Cmd + q
 $*^q::DllCall("LockWorkStation") 
@@ -171,7 +177,7 @@ $*^q::DllCall("LockWorkStation")
 ; Switch window -- Cmd + Tab
 Tab::
 if !AltTabbed {
-    Send {Ctrl Up}{Alt Down}{Tab}
+    Send {Ctrl Up}{Alt Down}{Tab}{Ctrl Down}
     AltTabbed := true
 } else {
     Send {Tab}
@@ -180,29 +186,29 @@ return
 
 ; Capture entire screen -- Cmd + Shift + 3
 ; (requires Windows 10 Snip & Sketch)
-*+3::Send {Ctrl Up}#{PrintScreen}
+*+3::Send {Ctrl Up}#{PrintScreen}{Ctrl Down}
 
 ; Capture portion of the screen -- Cmd + Shift + 4;
 ; (requires Windows 10 Snip & Sketch)
-*+4::Send {Ctrl Up}#+s
+*+4::Send {Ctrl Up}#+s{Ctrl Down}
 
 ; Launch Spotlight/Cortana -- Cmd + Space
 ; (Windows 10 only)
-Space::Send {Ctrl Up}#s
+Space::Send {Ctrl Up}#s{Ctrl Down}
 
 ; Launch Emoji keyboard -- Ctrl + Cmd + Space
 ; (Windows 10 only)
-$*^Space::Send {Ctrl Up}#{.}
+$*^Space::Send {Ctrl Up}#{.}{Ctrl Down}
 
 ; Paste plain text -- Cmd+Alt+Shift+V
 $*!+v::
-    AutoTrim Off
-    Clip0 = %ClipBoardAll%
-    ClipBoard = %ClipBoard%       ; Convert to text
-    Send ^v                       ; For best compatibility: SendPlay
-    Sleep 100                     ; Don't change clipboard while it is pasted! (Sleep > 0)
-    ClipBoard = %Clip0%           ; Restore original ClipBoard
-    VarSetCapacity(Clip0, 0)      ; Free memory
+AutoTrim Off
+Clip0 = %ClipBoardAll%
+ClipBoard = %ClipBoard%       ; Convert to text
+Send ^v                       ; For best compatibility: SendPlay
+Sleep 100                     ; Don't change clipboard while it is pasted! (Sleep > 0)
+ClipBoard = %Clip0%           ; Restore original ClipBoard
+VarSetCapacity(Clip0, 0)      ; Free memory
 return
 
 ; Switch windows of the same app -- Cmd + `

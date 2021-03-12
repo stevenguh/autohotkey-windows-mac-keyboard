@@ -29,14 +29,6 @@ GetWinKeyState() {
     return GetKeyState("LWin", "P") || GetKeyState("RWin", "P")
 }
 
-SendIfCmdDown(key, elseKey) {
-    if GetWinKeyState() {
-        Send %key%
-    } else {
-        Send %elseKey%
-    }
-}
-
 ExtractAppTitle(FullTitle)
 {	
 	AppTitle := SubStr(FullTitle, InStr(FullTitle, " ", false, -1) + 1)
@@ -239,35 +231,32 @@ return
 ; Media/Function Keys
 ; --------------------------------------------------------------
 
-; Launch the Task view (Windows 10 only)
-F3::SendIfCmdDown("{F3}", "#{Tab}")
+#If !GetKeyState("CapsLock", "T") ; if caps is not on
+F3::
+if GetWinKeyState() {
+    ; Show desktop
+    Send {Ctrl Up}#d{Ctrl Down}
+} else {
+    ; Launch the Task view (Windows 10 only)
+    Send #{Tab}
+}
+return
 
 ;; Use F4 as the Win key
 F4::
-if GetWinKeyState() {
-    Send {F4 Down}
-} else {
-    Send {LWin Down}
-}
-return
-
-F4 Up::
-if GetWinKeyState() {
-    Send {F4 Up}
-} else {
-    Send {LWin Up}
-}
-return
+Send {LWin Down}
+KeyWait, F4
+Send {LWin Up}
 
 ; Media Keys
-F7::SendIfCmdDown("{F7}", "{Media_Prev}")
-F8::SendIfCmdDown("{F8}", "{Media_Play_Pause}")
-F9::SendIfCmdDown("{F9}", "{Media_Next}")
+F7::Send {Media_Prev}
+F8::Send {Media_Play_Pause}
+F9::Send {Media_Next}
 
 ; Volume control keys
-F10::SendIfCmdDown("{F10}", "{Volume_Mute}")
-F11::SendIfCmdDown("{F11}", "{Volume_Down}")
-F12::SendIfCmdDown("{F12}", "{Volume_Up}")
+F10::Send {Volume_Mute}
+F11::Send {Volume_Down}
+F12::Send {Volume_Up}
 
 ; F13-15, Standard Windows Mapping
 F13::Send {PrintScreen}
@@ -277,3 +266,5 @@ F15::Send {Break}
 
 ; Eject Key
 F20::Send {Insert}
+
+#If

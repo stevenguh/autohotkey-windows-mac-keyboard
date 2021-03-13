@@ -160,6 +160,10 @@ $Delete:: Send {Ctrl Up}{Shift Down}{End}{Shift Up}{Delete}{Ctrl Down}
 
 #If GetWinKeyState() ; if cmd-pressed
 
+; Forward and back with Alt+Left/Right -- Cmd+[/]
+$[::Send {Ctrl Up}!{Left}{Ctrl Down}
+$]::Send {Ctrl Up}!{Right}{Ctrl Down}
+
 ; Disable built-in Win key shortcut -- Cmd+Esc
 Esc::Send {Ctrl Up}{Esc}{Ctrl Down}
 

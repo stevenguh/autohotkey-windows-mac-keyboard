@@ -135,14 +135,29 @@ $!Backspace:: Send ^{BackSpace}
 ; cmd+left/right/up/down
 Left:: Send {Ctrl Up}{Home}{Ctrl Down}
 Right:: Send {Ctrl Up}{End}{Ctrl Down}
-$Up:: Send {Ctrl Up}^{Home}{Ctrl Down}
-$Down:: Send {Ctrl Up}^{End}{Ctrl Down}
+Up:: Send {Ctrl Up}^{Home}{Ctrl Down}
+Down:: Send {Ctrl Up}^{End}{Ctrl Down}
 
 ; cmd+shift+left/right/up/down
-*+Left:: Send {Ctrl Up}+{Home}{Ctrl Down}
-*+Right:: Send {Ctrl Up}+{End}{Ctrl Down}
-$*+Up:: Send {Ctrl Up}^+{Home}{Ctrl Down}
-$*+Down:: Send {Ctrl Up}^+{End}{Ctrl Down}
+*+Left::
+Send {Ctrl Up}+{Home}{Ctrl Down}
+Gosub WaitForWin
+return
+
+*+Right::
+Send {Ctrl Up}+{End}{Ctrl Down}
+Gosub WaitForWin
+return
+
+*+Up::
+Send {Ctrl Up}^+{Home}{Ctrl Down}
+Gosub WaitForWin
+return
+
+*+Down::
+Send {Ctrl Up}^+{End}{Ctrl Down}
+Gosub WaitForWin
+return
 
 ; cmd+backspace
 $Backspace:: Send {Ctrl Up}{Shift Down}{Home}{Shift Up}{BackSpace}{Ctrl Down}
@@ -276,3 +291,24 @@ F15::Send {Break}
 F20::Send {Insert}
 
 #If
+
+WaitForWin:
+if GetKeyState("LWin", "P") {
+    SetTimer, WaitForLWin
+}
+if GetKeyState("RWin", "P") {
+    SetTimer, WaitForRWin
+}
+return
+
+WaitForLWin:
+KeyWait, LWin
+SetTimer, WaitForLWin, Off
+Send {Ctrl Up}
+return
+
+WaitForRWin:
+KeyWait, RWin
+SetTimer, WaitForRWin, Off
+Send {Ctrl Up}
+return

@@ -186,7 +186,11 @@ return
 
 ; Launch Spotlight/Cortana -- Cmd + Space
 ; (Windows 10 only)
-Space::Send {Ctrl Up}#s{Ctrl Down}
+Space::
+Send {Ctrl Up}{LWin Down}{s Down}
+Sleep 50
+Send {s Up}{LWin Up}{Ctrl Down}
+return
 
 ; Launch Emoji keyboard -- Ctrl + Cmd + Space
 ; (Windows 10 only)
